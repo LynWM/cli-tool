@@ -15,6 +15,7 @@ def add_user(args):
     if existing:
         console.print(f"[red]User '{args.name}' already exists.[/red]")
         return
+    
     user = User(args.name, args.email)
     save_all(User, Project, Task)
     console.print(f"[green]User '{args.name}' created successfully![/green]")
