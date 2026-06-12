@@ -20,26 +20,28 @@ def load_data():
 def save_data(data):
     try:
         with open(tool_data, "w") as f:
-            json.dump(data, f, indent=2) #is indent necessary?*R
+            json.dump(data, f, indent=2)
     except IOError as e:
         print(f"Error saving data: {e}")
 
-
+# passing classes as parameters instead of imports - avoid circular imports
 def load_all(UserClass, ProjectClass, TaskClass):
     
     data = load_data()
 
+    # clearing to avoid duplicates
     UserClass._all.clear()
     ProjectClass._all.clear()
     ProjectClass._id_counter = 1
     TaskClass._all.clear()
     TaskClass._id_counter = 1
 
-    # *R
+    # rebuilding users
     for u in data["users"]:
         user = UserClass(u["name"], u["email"])
         user.projects = u.get("projects", [])
 
+    # rebuilding projects
     for p in data["projects"]:
         project = ProjectClass(
             p["title"],
@@ -52,7 +54,7 @@ def load_all(UserClass, ProjectClass, TaskClass):
         if p["id"] >= ProjectClass._id_counter:
             ProjectClass._id_counter = p["id"] + 1
 
-
+    # rebuilding tasks
     for t in data["tasks"]:
         task = TaskClass(
             t["title"],
