@@ -11,7 +11,7 @@ This is a simple CLI Tool used to add and manage users and tasks.
 3. Clone the forked repository to your local machine using:
 
 ```bash
-git clone <repo-url>
+git clone git@github.com:LynWM/cli-tool.git
 cd cli-tool
 ```
 
