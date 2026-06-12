@@ -1,11 +1,5 @@
 {
-  "users": [
-    {
-      "name": "Lynette",
-      "email": "murathimilynette@gmail.com",
-      "projects": []
-    }
-  ],
+  "users": [],
   "projects": [],
   "tasks": []
 }
