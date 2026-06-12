@@ -5,7 +5,7 @@ class Task:
     def __init__(self, title, project_title, assigned_to=None):
         self._title = title
         self._project_title = project_title
-        self._assigned_to = assigned_to
+        self.assigned_to = assigned_to
         self._status = "pending"   
         self.id = Task._id_counter
         Task._id_counter += 1
@@ -35,17 +35,10 @@ class Task:
         self._status = value
 
     @property
-    def assigned_to(self):
-        return self._assigned_to
-
-    @assigned_to.setter
-    def assigned_to(self, value):
-        self._assigned_to = value
-
-    @property
     def project_title(self):
         return self._project_title
-
+    
+    # Class methods
     @classmethod
     def all(cls):
         return cls._all
@@ -66,12 +59,12 @@ class Task:
             "id": self.id,
             "title": self._title,
             "project_title": self._project_title,
-            "assigned_to": self._assigned_to,
+            "assigned_to": self.assigned_to,
             "status": self._status
         }
 
     def __str__(self):
-        assigned = self._assigned_to or "Unassigned"
+        assigned = self.assigned_to or "Unassigned"
         return (f"Task #{self.id}: {self._title} \n "
                 f"Project: {self._project_title} \n "
                 f"Assigned to: {assigned} \n "
