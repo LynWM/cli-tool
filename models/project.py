@@ -26,13 +26,14 @@ class Project:
             raise ValueError("Project Title cannot be empty. Please try again")
         self._title = value
     
-    # *R
     @property
     def description(self):
         return self._description
     
     @description.setter
     def description(self, value):
+        if not value:
+            raise ValueError("Project Description cannot be empty. Please try again")
         self._description = value
 
     @property
@@ -55,7 +56,7 @@ class Project:
     def all(cls):
         return cls._all
     
-    # *R
+    #methods used in main.py
     @classmethod
     def find_by_title(cls, title):
         return next((p for p in cls._all if p.title == title), None)
@@ -64,6 +65,7 @@ class Project:
     def find_by_owner(cls, owner_name):
         return [p for p in cls._all if p.owner_name == owner_name]
 
+    # converting to dict to be saved by JSON => file_io.py
     def to_dict(self):
         return {
             "id": self.id,
