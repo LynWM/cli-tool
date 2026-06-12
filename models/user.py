@@ -4,8 +4,7 @@ class Person:
         self.name = name
         self.email = email
     
-    # INSTANCE METHODS
-
+    # Instance  Methods
     @property
     def name(self):
         return self._name
@@ -22,7 +21,7 @@ class Person:
     
     @email.setter
     def email(self, value):
-        if "@" not in value:
+        if "@" not in value or "." not in value.split("@")[-1]:
             raise ValueError("Please enter a valid email address")
         self._email = value
 
@@ -36,7 +35,8 @@ class User(Person):
 
     def __init__(self, name, email):
         super().__init__(name, email)
-        # *R
+        
+        
         self.projects = []
         User._all.append(self)
 
@@ -46,7 +46,6 @@ class User(Person):
         return cls._all
     
     @classmethod
-    # *R
     def find_by_name(cls, name):
         return next((u for u in cls._all if u.name == name), None)
     
@@ -59,4 +58,4 @@ class User(Person):
         }
     
     def __str__(self):
-        return f"User: {self._name} \n Email: {self._email} \n Projects: {len(self.projects)}"
+        return f"User: {self._name} | Email: {self._email} | Projects: {len(self.projects)}"
