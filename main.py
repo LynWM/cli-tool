@@ -20,13 +20,15 @@ def add_user(args):
     save_all(User, Project, Task)
     console.print(f"[green]User '{args.name}' created successfully![/green]")
 
-
+# Listing users
 def list_users(args):
     load_all(User, Project, Task)
     users = User.all()
     if not users:
         console.print("[yellow]No users found.[/yellow]")
         return
+    
+    # returning a table with users
     table = Table(title="Users")
     table.add_column("Name", style="cyan")
     table.add_column("Email", style="magenta")
@@ -35,7 +37,7 @@ def list_users(args):
         table.add_row(user.name, user.email, str(len(user.projects)))
     console.print(table)
 
-
+# adding projects
 def add_project(args):
     load_all(User, Project, Task)
     user = User.find_by_name(args.user)
@@ -51,7 +53,7 @@ def add_project(args):
     save_all(User, Project, Task)
     console.print(f"[green] Project '{args.title}' added to '{args.user}'![/green]")
 
-
+# Listing projects
 def list_projects(args):
     load_all(User, Project, Task)
     if args.user:
@@ -81,7 +83,7 @@ def list_projects(args):
         )
     console.print(table)
 
-
+# adding tasks
 def add_task(args):
     load_all(User, Project, Task)
     project = Project.find_by_title(args.project)
@@ -93,7 +95,7 @@ def add_task(args):
     save_all(User, Project, Task)
     console.print(f"[green] Task '{args.title}' added to '{args.project}'![/green]")
 
-
+# listing tasks
 def list_tasks(args):
     load_all(User, Project, Task)
     if args.project:
@@ -121,7 +123,7 @@ def list_tasks(args):
         )
     console.print(table)
 
-
+# marking task as completed/not completed
 def complete_task(args):
     load_all(User, Project, Task)
     task = Task.find_by_id(args.id)
@@ -133,6 +135,7 @@ def complete_task(args):
     console.print(f"[green]Task '{task.title}' marked as complete![/green]")
 
 
+# argparse and subparsers(subcommands)
 def main():
     parser = argparse.ArgumentParser(
         description="CLI Project Management Tool"
