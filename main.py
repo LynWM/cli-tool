@@ -29,7 +29,7 @@ def list_users(args):
         return
     
     # returning a table with users
-    table = Table(title="Users")
+    table = Table(title="Users", show_lines=True)
     table.add_column("Name", style="cyan")
     table.add_column("Email", style="magenta")
     table.add_column("Projects", style="green")
@@ -65,7 +65,7 @@ def list_projects(args):
     if not projects:
         console.print("[yellow]No projects found.[/yellow]")
         return
-    table = Table(title=title)
+    table = Table(title=title, show_lines=True)
     table.add_column("ID", style="cyan")
     table.add_column("Title", style="magenta")
     table.add_column("Description", style="white")
@@ -107,7 +107,7 @@ def list_tasks(args):
     if not tasks:
         console.print("[yellow]No tasks found.[/yellow]")
         return
-    table = Table(title=title)
+    table = Table(title=title, show_lines=True)
     table.add_column("ID", style="cyan")
     table.add_column("Title", style="magenta")
     table.add_column("Project", style="white")
